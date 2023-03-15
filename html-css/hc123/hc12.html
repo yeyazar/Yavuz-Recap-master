@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        th{
+            background-color: navy;
+        }
+
+        td{
+            text-align: center;
+            background-color: turquoise;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>LISTS</h1>
+    <h3>Ordered Lists</h3>
+    <hr />
+
+    <h2>LISTS EXAMPLE</h2>
+    <ol>
+        <li>
+            Fruits
+            <ul>
+                <li>Apple</li>
+                <li>Banana</li>
+            </ul>
+        </li>
+        <li>
+            Vegetables
+            <ul type="square">
+                <li>Cabbage</li>
+                <li>Spinach</li>
+            </ul>
+        </li>
+    </ol>
+
+    <ol reversed id="Vega">
+        <li>FullStack</li>
+        <li>DataScience</li>
+        <li>AWSDevOps</li>
+        <li>Tester</li>
+        <li>CyberSecurity</li>
+        <li>Design</li>
+    </ol>
+
+    <h3>Unordered Lists</h3>
+    <hr />
+
+    <dl>
+        <dt>Araba</dt>
+        <dd>4 wheeled land vehicle</dd>
+        <dt>Watermelon</dt>
+        <dd>Watery summer fruit</dd>
+        <dt>Chocolate</dt>
+        <dd>King of deserts</dd>
+    </dl>
+
+    <hr>
+    <hr>
+    <hr>
+
+    <h1>TABLES</h1>
+
+    <table border="10" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Lastname</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>Jack</th>
+                <th>Mick</th>
+                <th>35</th>
+            </tr>
+            <tr>
+                <td>Angel</td>
+                <td rowspan="2">Hell</td>
+                <td>45</td>
+            </tr>
+
+            <tr>
+                <td>Kyle</td>
+                <td rowspan="2">12</td>
+            </tr>
+
+            <tr>
+                <td>Sebastian</td>
+                <td>Jr.</td>
+            </tr>
+
+            <tr>
+                <td colspan="3" align="center">empty</td>
+            </tr>
+        </tbody>
+    </table>
+
+<hr>
+<hr>
+<hr>
+
+    <h1>EXAMPLE TABLE</h1>
+
+    <table border="1" width="100%">
+        <h3>Costumar Information Table</h3>
+
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th colspan="2">Jobs</th>
+                <th>Working Experience</th>
+            </tr>
+
+            <tr>
+                <th>a</th>
+                <th>b</th>
+                <th style="background-color: tomato">c</th>
+                <th>d</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Henry</td>
+                <td colspan="2">Senior Developer</td>
+                <td rowspan="2">5 years</td>
+            </tr>
+            <tr>
+                <td>Jason</td>
+                <td>Software Engineer</td>
+                <td>Fullstack Developer</td>
+            </tr>
+            <tr>
+                <td>Fred</td>
+                <td>Junior Developer</td>
+                <td>Backend Developer</td>
+                <td>2 years</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
