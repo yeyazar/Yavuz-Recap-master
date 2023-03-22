@@ -22,7 +22,7 @@ function App() {
         <Provider store={store}>
           <AppRouter />
         </Provider>
-        <ToastContainer />
+        <ToastContainer /> 
       </ThemeProvider>
     </>
   );
