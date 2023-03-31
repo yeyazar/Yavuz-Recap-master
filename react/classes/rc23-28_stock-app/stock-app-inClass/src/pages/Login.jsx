@@ -9,14 +9,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import TextField from "@mui/material/TextField";
-import { object, string, number, date, InferType } from "yup";
+import { object, string } from "yup";
+import LoadingButton from "@mui/lab/LoadingButton";
+import useAuthCall from "../hooks/useAuthCall";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { currentUser, error } = useSelector((state) => state?.auth);
+  const { currentUser, error, loading } = useSelector((state) => state?.auth);
+
+  const { login } = useAuthCall();
 
   const loginScheme = object({
-    email: string().email("Wrong email format!").required("Email is mandatory!"),
+    email: string()
+      .email("Wrong email format!")
+      .required("Email is mandatory!"),
     password: string()
       .required("Password is mandatory!")
       .min(8, "Pass must be minimum 8 chars!")
@@ -24,7 +30,10 @@ const Login = () => {
       .matches(/\d+/, "Pass needs at least a number!")
       .matches(/[a-z]/, "Pass needs at least a lower-case letter")
       .matches(/[A-Z]/, "Pass needs at least an upper-case letter")
-      .matches(/[!,?{}><%&$#*+-.]/, "Pass needs at least one special character")
+      .matches(
+        /[!,?{}><%&$#*+-.]/,
+        "Pass needs at least one special character"
+      ),
   });
 
   return (
@@ -68,8 +77,7 @@ const Login = () => {
             initialValues={{ email: "", password: "" }}
             validationSchema={loginScheme}
             onSubmit={(values, actions) => {
-              //TODO login(values)  POST istegi
-              //TODO navigate
+              login(values);
               actions.resetForm();
               actions.setSubmitting(false);
             }}
@@ -101,6 +109,14 @@ const Login = () => {
                     error={touched.password && Boolean(errors.password)}
                     helperText={touched.password && errors.password}
                   />
+
+                  <LoadingButton
+                    variant="contained"
+                    type="submit"
+                    loading={loading}
+                  >
+                    Submit
+                  </LoadingButton>
                 </Box>
               </Form>
             )}
