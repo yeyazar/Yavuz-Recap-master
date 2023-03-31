@@ -17,7 +17,7 @@ const useAuthCall = () => {
         userInfo
       );
       dispatch(loginSuccess(data));
-      navigate("/stock")
+      navigate("/stock");
       console.log(data);
     } catch (error) {
       dispatch(fetchFail());
