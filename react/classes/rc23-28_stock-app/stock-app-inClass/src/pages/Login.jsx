@@ -7,14 +7,26 @@ import LockIcon from "@mui/icons-material/Lock";
 import image from "../assets/result.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Formik } from "formik";
-import { TextField } from "@mui/material/TextField";
+import { Formik, Form } from "formik";
+import TextField from "@mui/material/TextField";
+import { object, string, number, date, InferType } from "yup";
 
 const Login = () => {
   const navigate = useNavigate();
   const { currentUser, error } = useSelector((state) => state?.auth);
 
-  const loginScheme = {};
+  const loginScheme = object({
+    email: string().email("Wrong email format!").required("Email is mandatory!"),
+    password: string()
+      .required("Password is mandatory!")
+      .min(8, "Pass must be minimum 8 chars!")
+      .max(20, "Pass cannot exceed 20 chars!")
+      .matches(/\d+/, "Pass needs at least a number!")
+      .matches(/[a-z]/, "Pass needs at least a lower-case letter")
+      .matches(/[A-Z]/, "Pass needs at least an upper-case letter")
+      .matches(/[!,?{}><%&$#*+-.]/, "Pass needs at least one special character")
+  });
+
   return (
     <Container maxWidth="lg">
       <Grid
@@ -56,27 +68,42 @@ const Login = () => {
             initialValues={{ email: "", password: "" }}
             validationSchema={loginScheme}
             onSubmit={(values, actions) => {
-              //TODO login() post request
-              //todo navigate
-              actions.resetForm()
-              actions.setSubmitting(false)
+              //TODO login(values)  POST istegi
+              //TODO navigate
+              actions.resetForm();
+              actions.setSubmitting(false);
             }}
           >
-             {({
-         values,
-         errors,
-         handleChange,
-         handleBlur,
-         handleSubmit,
-       }) => {
-
-          <Form>
-            <TextField></TextField>
-          </Form>
-
-       }}
-
-
+            {({ values, handleChange, handleBlur, errors, touched }) => (
+              <Form>
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                  <TextField
+                    label="Email"
+                    name="email"
+                    id="email"
+                    type="email"
+                    variant="outlined"
+                    value={values?.email || ""}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
+                  />
+                  <TextField
+                    label="Password"
+                    name="password"
+                    id="password"
+                    type="password"
+                    variant="outlined"
+                    value={values?.password || ""}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.password && Boolean(errors.password)}
+                    helperText={touched.password && errors.password}
+                  />
+                </Box>
+              </Form>
+            )}
           </Formik>
 
           <Box sx={{ textAlign: "center", mt: 2 }}>
