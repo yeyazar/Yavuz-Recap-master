@@ -23,12 +23,13 @@ const Firms = () => {
       <Typography variant="h3" color="error" mb={3}>
         Firm
       </Typography>
-      <Button variant="contained">New Firm</Button>
+      <Button variant="contained" sx={{ mb: 3 }}>
+        New Firm
+      </Button>
       <Grid container sx={flex}>
         {firms?.map((firm) => (
           <Grid item key={firm.id}>
-              <FirmCard firm={firm}/>
-
+            <FirmCard firm={firm} />
           </Grid>
         ))}
       </Grid>
