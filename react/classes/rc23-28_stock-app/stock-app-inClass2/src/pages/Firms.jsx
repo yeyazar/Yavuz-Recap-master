@@ -5,6 +5,7 @@ import useStockCall from "../hooks/useStockCall";
 import { useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import FirmCard from "../components/FirmCard";
+import { flex } from "../styles/globalStyles";
 
 const Firms = () => {
   const { getStockData } = useStockCall();
@@ -23,7 +24,7 @@ const Firms = () => {
         Firm
       </Typography>
       <Button variant="contained">New Firm</Button>
-      <Grid container>
+      <Grid container sx={flex}>
         {firms?.map((firm) => (
           <Grid item key={firm.id}>
               <FirmCard firm={firm}/>
