@@ -5,10 +5,10 @@ import { fetchFail, fetchStart, getSuccess } from "../features/stockSlice";
 const useStockCall = () => {
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  
+
   const getStockData = async (url) => {
     const BASE_URL = "http://12233.fullstack.clarusway.com/";
-    dispatch(fetchStart());
+    dispatch(fetchStart())
 
     try {
       const { data } = await axios(`${BASE_URL}stock/${url}/`, {
