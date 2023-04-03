@@ -6,15 +6,15 @@ const useStockCall = () => {
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  
+
   const getStockData = async (url) => {
     const BASE_URL = "http://12233.fullstack.clarusway.com/";
-    dispatch(fetchStart())
+    dispatch(fetchStart());
 
     try {
       const { data } = await axios(`${BASE_URL}stock/${url}/`, {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
+        headers: { Authorization: `Token ${token}` },
       });
       dispatch(getSuccess({ data, url }));
     } catch (error) {
@@ -22,8 +22,22 @@ const useStockCall = () => {
       dispatch(fetchFail());
     }
   };
+  const deleteStockData = async (url, id) => {
+    const BASE_URL = "http://12233.fullstack.clarusway.com/";
+    dispatch(fetchStart());
 
-  return { getStockData };
+    try {
+      axios.delete(`${BASE_URL}stock/${url}/${id}/`, {
+        headers: { Authorization: `Token ${token}` },
+      });
+      getStockData(url);
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchFail());
+    }
+  };
+
+  return { getStockData, deleteStockData };
 };
 
 export default useStockCall;
