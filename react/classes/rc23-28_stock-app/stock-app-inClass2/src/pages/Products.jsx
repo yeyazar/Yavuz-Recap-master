@@ -3,19 +3,9 @@ import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import useStockCall from "../hooks/useStockCall";
 import { useSelector } from "react-redux";
-import { Grid } from "@mui/material";
-import FirmCard from "../components/FirmCard";
-import { flex } from "../styles/globalStyle";
 import ProductModal from "../components/modals/ProductModal";
-import ProductCard from "../components/ProductCard";
-import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import { DataGrid } from "@mui/x-data-grid";
 
 const Products = () => {
   const { getStockData } = useStockCall();
@@ -30,6 +20,60 @@ const Products = () => {
     address: "",
     image: "",
   });
+
+  const columns = [
+    {
+      field: "id",
+      headerName: "#",
+      minWidth: 40,
+      maxWidth: 70,
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "category",
+      headerName: "Category",
+      headerAlign: "center",
+      align: "center",
+      minWidth: 150,
+      flex: 2,
+    },
+    {
+      field: "brand",
+      headerName: "Brand",
+      headerAlign: "center",
+      align: "center",
+      minWidth: 150,
+      flex: 2,
+    },
+    {
+      field: "name",
+      headerName: "Name",
+      type: "number",
+      headerAlign: "center",
+      align: "center",
+      minWidth: 150,
+      flex: 2,
+    },
+    {
+      field: "stock",
+      headerName: "Stock",
+      headerAlign: "center",
+      align: "center",
+      minWidth: 100,
+      flex: 0.7,
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      type: "number",
+      headerAlign: "center",
+      align: "center",
+      minWidth: 50,
+      flex: 1,
+    },
+  ];
 
   useEffect(() => {
     getStockData("products");
@@ -52,37 +96,22 @@ const Products = () => {
         setInfo={setInfo}
       />
 
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="right">#</TableCell>
-              <TableCell align="right">Category</TableCell>
-              <TableCell align="right">Brand</TableCell>
-              <TableCell align="right">Name</TableCell>
-              <TableCell align="right">Stock</TableCell>
-              <TableCell align="right">Operation</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {products?.map((pro, index) => (
-              <TableRow
-                key={pro.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="pro" align="right">
-                  {index + 1}
-                </TableCell>
-                <TableCell align="right">{pro.category}</TableCell>
-                <TableCell align="right">{pro.brand}</TableCell>
-                <TableCell align="right">{pro.name}</TableCell>
-                <TableCell align="right">{pro.stock}</TableCell>
-                <TableCell align="right"></TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Box sx={{ width: "100%" }}>
+        <DataGrid
+          autoHeight
+          rows={products}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
+            },
+          }}
+          pageSizeOptions={[5]}
+          disableRowSelectionOnClick
+        />
+      </Box>
     </div>
   );
 };
