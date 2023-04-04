@@ -10,7 +10,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { btnStyle } from "../styles/globalStyle";
 
 const Products = () => {
-  const { getStockData, deleteStockData, getProCatBrand } = useStockCall();
+  const { deleteStockData, getProCatBrand } = useStockCall();
   const { products } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
 
@@ -129,6 +129,9 @@ const Products = () => {
           pageSizeOptions={[5]}
           disableRowSelectionOnClick
           slots={{ toolbar: GridToolbar }}
+          sx={{
+            boxShadow: 4,
+          }}
         />
       </Box>
     </div>
