@@ -13,7 +13,9 @@ const Products = () => {
   const { getStockData, deleteStockData } = useStockCall();
   const { products } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
+
   const handleOpen = () => setOpen(true);
+
   const handleClose = () => setOpen(false);
 
   const [info, setInfo] = useState({
@@ -89,6 +91,8 @@ const Products = () => {
 
   useEffect(() => {
     getStockData("products");
+    getStockData("categories");
+    getStockData("brands");
   }, []);
 
   return (

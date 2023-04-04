@@ -4,17 +4,15 @@ import { modalStyle } from "../../styles/globalStyle";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import useStockCall from "../../hooks/useStockCall";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { useSelector } from "react-redux";
 
 export default function ProductModal({ open, handleClose, info, setInfo }) {
-  // const [info, setInfo] = useState({
-  //   name: "",
-  //   phone: "",
-  //   address: "",
-  //   image: "",
-  // });
-
-  const { postStockData, putStockData } = useStockCall();
-
+  const { postStockData } = useStockCall();
+  const { categories } = useSelector((state) => state.stock);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInfo({ ...info, [name]: value });
@@ -22,11 +20,9 @@ export default function ProductModal({ open, handleClose, info, setInfo }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (info.id) {
-      putStockData("products", info);
-    } else {
-      postStockData("products", info);
-    }
+
+    postStockData("products", info);
+
     handleClose();
     setInfo({ name: "", phone: "", address: "", image: "" });
   };
@@ -48,6 +44,20 @@ export default function ProductModal({ open, handleClose, info, setInfo }) {
             component="form"
             onSubmit={handleSubmit}
           >
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Categories</InputLabel>
+              <Select
+                labelId="category"
+                id="category"
+                // value={age}
+                label="Category"
+                onChange={handleChange}
+              >
+                {categories?.map((item)=> (
+                  <MenuItem value={item.name}>{item.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <TextField
               label="Firm Name"
               name="name"
