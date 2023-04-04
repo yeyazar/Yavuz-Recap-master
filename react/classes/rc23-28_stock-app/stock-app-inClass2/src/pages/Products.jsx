@@ -5,10 +5,12 @@ import useStockCall from "../hooks/useStockCall";
 import { useSelector } from "react-redux";
 import ProductModal from "../components/modals/ProductModal";
 import Box from "@mui/material/Box";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import {btnStyle} from "../styles/globalStyle";
 
 const Products = () => {
-  const { getStockData } = useStockCall();
+  const { getStockData, deleteStockData } = useStockCall();
   const { products } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -72,6 +74,17 @@ const Products = () => {
       align: "center",
       minWidth: 50,
       flex: 1,
+      renderCell: ({id}) => {
+        return (
+          <GridActionsCellItem
+            icon={<DeleteForeverIcon />}
+            label="Delete"
+            sx={btnStyle}
+            onClick={ ()=> {
+              deleteStockData("products", id)}}
+          />
+        );
+      },
     },
   ];
 
@@ -85,7 +98,7 @@ const Products = () => {
         Products
       </Typography>
 
-      <Button variant="contained" sx={{ mb: "1rem" }} onClick={handleOpen}>
+      <Button variant="contained" onClick={handleOpen}>
         New Product
       </Button>
 
@@ -96,7 +109,7 @@ const Products = () => {
         setInfo={setInfo}
       />
 
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%", mt: "1rem" }}>
         <DataGrid
           autoHeight
           rows={products}
