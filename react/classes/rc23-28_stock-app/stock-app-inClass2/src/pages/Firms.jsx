@@ -21,7 +21,6 @@ const Firms = () => {
     getStockData("firms");
   }, []);
 
-  console.log(firms);
 
   return (
     <div>
