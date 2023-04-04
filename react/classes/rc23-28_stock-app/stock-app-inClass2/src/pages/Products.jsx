@@ -94,6 +94,7 @@ const Products = () => {
     // getStockData("categories");
     // getStockData("brands");
 
+    //! Promise All
     getProCatBrand()
   }, []);
 
