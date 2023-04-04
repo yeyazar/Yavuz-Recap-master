@@ -10,7 +10,8 @@ import { btnStyle, flex } from "../styles/globalStyles";
 import useStockCall from "../hooks/useStockCall";
 
 export default function FirmCard({ firm }) {
-    const {deleteStockData} = useStockCall()
+  const { deleteStockData } = useStockCall();
+
   return (
     <Card
       sx={{
@@ -19,7 +20,7 @@ export default function FirmCard({ firm }) {
         height: "400px",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
       }}
     >
       <CardContent>
@@ -31,9 +32,10 @@ export default function FirmCard({ firm }) {
         </Typography>
       </CardContent>
       <CardMedia
-        sx={{ p: 1, objectFit: "contain", height: "130px"}}
+        sx={{ p: 1, objectFit: "contain", height: "130px" }}
         image={firm?.image}
         title="firm-image"
+        component="img"
       />
       <Typography variant="body2" color="text.secondary">
         {firm?.phone}
@@ -41,7 +43,10 @@ export default function FirmCard({ firm }) {
 
       <CardActions sx={flex}>
         <EditIcon sx={btnStyle} />
-        <DeleteOutlineIcon sx={btnStyle} onClick={()=> deleteStockData("firms", firm.id)}/>
+        <DeleteOutlineIcon
+          sx={btnStyle}
+          onClick={() => deleteStockData("firms", firm.id)}
+        />
       </CardActions>
     </Card>
   );

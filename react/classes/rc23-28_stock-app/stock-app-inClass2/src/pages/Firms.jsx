@@ -20,12 +20,14 @@ const Firms = () => {
 
   return (
     <div>
-      <Typography variant="h3" color="error" mb={3}>
+      <Typography variant="h4" color="error" mb={3}>
         Firm
       </Typography>
-      <Button variant="contained" sx={{ mb: 3 }}>
+
+      <Button variant="contained" sx={{ mb: "1rem" }}>
         New Firm
       </Button>
+
       <Grid container sx={flex}>
         {firms?.map((firm) => (
           <Grid item key={firm.id}>
