@@ -1,19 +1,19 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { modalStyle } from "../../styles/globalStyles";
+import { modalStyle } from "../../styles/globalStyle";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import useStockCall from "../../hooks/useStockCall";
 
-export default function FirmModal({ open, handleClose }) {
-  const [info, setInfo] = useState({
-    name: "",
-    phone: "",
-    address: "",
-    image: "",
-  });
+export default function FirmModal({ open, handleClose, info, setInfo }) {
+  // const [info, setInfo] = useState({
+  //   name: "",
+  //   phone: "",
+  //   address: "",
+  //   image: "",
+  // });
 
   const { postStockData } = useStockCall();
 
@@ -24,7 +24,6 @@ export default function FirmModal({ open, handleClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("handlesubmit");
     postStockData("firms", info);
     handleClose();
     setInfo({

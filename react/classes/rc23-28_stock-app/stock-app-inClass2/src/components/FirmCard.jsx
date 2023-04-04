@@ -6,11 +6,11 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
-import { btnStyle, flex } from "../styles/globalStyles";
+import { btnStyle, flex } from "../styles/globalStyle";
 import useStockCall from "../hooks/useStockCall";
 
-export default function FirmCard({ firm }) {
-  const { deleteStockData } = useStockCall();
+export default function FirmCard({ firm, setOpen, setInfo }) {
+  const { deleteStockData, putStockData } = useStockCall();
 
   return (
     <Card
@@ -42,7 +42,13 @@ export default function FirmCard({ firm }) {
       </Typography>
 
       <CardActions sx={flex}>
-        <EditIcon sx={btnStyle} />
+        <EditIcon
+          sx={btnStyle}
+          onClick={() => {
+            setOpen(true);
+            setInfo(firm);
+          }}
+        />
         <DeleteOutlineIcon
           sx={btnStyle}
           onClick={() => deleteStockData("firms", firm.id)}
