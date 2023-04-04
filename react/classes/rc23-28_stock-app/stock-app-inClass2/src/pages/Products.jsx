@@ -8,6 +8,14 @@ import FirmCard from "../components/FirmCard";
 import { flex } from "../styles/globalStyle";
 import ProductModal from "../components/modals/ProductModal";
 import ProductCard from "../components/ProductCard";
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 const Products = () => {
   const { getStockData } = useStockCall();
@@ -32,28 +40,49 @@ const Products = () => {
       <Typography variant="h4" color="error" mb={3}>
         Products
       </Typography>
+
       <Button variant="contained" sx={{ mb: "1rem" }} onClick={handleOpen}>
         New Product
       </Button>
+
       <ProductModal
         open={open}
         handleClose={handleClose}
         info={info}
         setInfo={setInfo}
       />
-      <Grid container sx={flex}>
-        {products?.map((product) => (
-          <Grid item key={product.id}>
-            <ProductCard
-              product={product}
-              setOpen={setOpen}
-              info={info}
-              setInfo={setInfo}
-            />
-          </Grid>
-        ))}
-      </Grid>
-      ;
+
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="right">#</TableCell>
+              <TableCell align="right">Category</TableCell>
+              <TableCell align="right">Brand</TableCell>
+              <TableCell align="right">Name</TableCell>
+              <TableCell align="right">Stock</TableCell>
+              <TableCell align="right">Operation</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {products?.map((pro, index) => (
+              <TableRow
+                key={pro.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="pro" align="right">
+                  {index + 1}
+                </TableCell>
+                <TableCell align="right">{pro.category}</TableCell>
+                <TableCell align="right">{pro.brand}</TableCell>
+                <TableCell align="right">{pro.name}</TableCell>
+                <TableCell align="right">{pro.stock}</TableCell>
+                <TableCell align="right"></TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };
