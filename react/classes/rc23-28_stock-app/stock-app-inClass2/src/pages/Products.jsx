@@ -6,11 +6,12 @@ import { useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import FirmCard from "../components/FirmCard";
 import { flex } from "../styles/globalStyle";
-import FirmModal from "../components/modals/FirmModal";
+import ProductModal from "../components/modals/ProductModal";
+import ProductCard from "../components/ProductCard";
 
 const Products = () => {
   const { getStockData } = useStockCall();
-  const { firms } = useSelector((state) => state.stock);
+  const { products } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -23,28 +24,28 @@ const Products = () => {
   });
 
   useEffect(() => {
-    getStockData("firms");
+    getStockData("products");
   }, []);
 
   return (
     <div>
       <Typography variant="h4" color="error" mb={3}>
-        Firm
+        Products
       </Typography>
       <Button variant="contained" sx={{ mb: "1rem" }} onClick={handleOpen}>
-        New Firm
+        New Product
       </Button>
-      <FirmModal
+      <ProductModal
         open={open}
         handleClose={handleClose}
         info={info}
         setInfo={setInfo}
       />
       <Grid container sx={flex}>
-        {firms?.map((firm) => (
-          <Grid item key={firm.id}>
-            <FirmCard
-              firm={firm}
+        {products?.map((product) => (
+          <Grid item key={product.id}>
+            <ProductCard
+              product={product}
               setOpen={setOpen}
               info={info}
               setInfo={setInfo}

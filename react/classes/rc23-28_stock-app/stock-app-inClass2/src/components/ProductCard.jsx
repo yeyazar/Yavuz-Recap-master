@@ -9,7 +9,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { btnStyle, flex } from "../styles/globalStyle";
 import useStockCall from "../hooks/useStockCall";
 
-export default function FirmCard({ firm, setOpen, setInfo }) {
+export default function ProductCard({ firm, setOpen, setInfo }) {
   const { deleteStockData, putStockData } = useStockCall();
 
   return (
@@ -51,7 +51,7 @@ export default function FirmCard({ firm, setOpen, setInfo }) {
         />
         <DeleteOutlineIcon
           sx={btnStyle}
-          onClick={() => deleteStockData("firms", firm.id)}
+          onClick={() => deleteStockData("products", firm.id)}
         />
       </CardActions>
     </Card>
