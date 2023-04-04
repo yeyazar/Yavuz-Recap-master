@@ -19,10 +19,9 @@ const Products = () => {
   const handleClose = () => setOpen(false);
 
   const [info, setInfo] = useState({
+    category_id: "",
+    brand_id: "",
     name: "",
-    phone: "",
-    address: "",
-    image: "",
   });
 
   const columns = [
@@ -95,7 +94,7 @@ const Products = () => {
     // getStockData("brands");
 
     //! Promise All
-    getProCatBrand()
+    getProCatBrand();
   }, []);
 
   return (

@@ -24,7 +24,11 @@ export default function ProductModal({ open, handleClose, info, setInfo }) {
     postStockData("products", info);
 
     handleClose();
-    setInfo({ name: "", phone: "", address: "", image: "" });
+    setInfo({
+      category_id: "",
+      brand_id: "",
+      name: "",
+    });
   };
 
   return (
@@ -33,7 +37,11 @@ export default function ProductModal({ open, handleClose, info, setInfo }) {
         open={open}
         onClose={() => {
           handleClose();
-          setInfo({ name: "", phone: "", address: "", image: "" });
+          setInfo({
+            category_id: "",
+            brand_id: "",
+            name: "",
+          });
         }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -49,12 +57,14 @@ export default function ProductModal({ open, handleClose, info, setInfo }) {
               <Select
                 labelId="category"
                 id="category"
-                // value={age}
+                value={info?.category_id}
                 label="Category"
                 onChange={handleChange}
               >
-                {categories?.map((item)=> (
-                  <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>
+                {categories?.map((item) => (
+                  <MenuItem value={item.name} key={item.id}>
+                    {item.name}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
